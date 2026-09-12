@@ -1,0 +1,115 @@
+/* ==================== ORDER HISTORY DRAWER ==================== */
+.order-history-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 43, 36, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: var(--z-modal-backdrop);
+}
+
+.order-history {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(28, 43, 36, 0.1);
+}
+
+.order-history__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5);
+  border-bottom: 2px solid var(--ink);
+}
+
+.order-history__title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.order-history__count {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.order-history__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.order-history__refresh-btn,
+.order-history__close-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  transition: all var(--transition-base);
+}
+
+.order-history__refresh-btn:hover,
+.order-history__close-btn:hover {
+  background: var(--forest-tint);
+  color: var(--forest-dark);
+  border-color: var(--forest);
+}
+
+.spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+/* List */
+.order-history__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Empty */
+.order-history__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.order-history__empty-icon {
+  font-size: 2rem;
+  opacity: 0.3;
+}
+
+.order-history__empty p {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.order-history__empty span {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+}

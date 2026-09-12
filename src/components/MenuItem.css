@@ -1,0 +1,163 @@
+/* ==================== MENU ITEM CARD ==================== */
+.menu-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition-base);
+  user-select: none;
+}
+
+.menu-item:hover {
+  border-color: var(--line-strong);
+}
+
+/* "In cart" state — forest border highlight */
+.menu-item--in-cart {
+  border-color: var(--forest);
+}
+
+/* Popular badge — semantic tag, not a decorative pill */
+.menu-item__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  background: var(--forest-tint);
+  border: 1px solid var(--forest);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--forest-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Emoji */
+.menu-item__emoji-container {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item__emoji {
+  font-size: 2rem;
+  z-index: 1;
+  transform-origin: center bottom;
+}
+
+/* Info */
+.menu-item__info {
+  min-height: 0;
+  flex: 1;
+}
+
+.menu-item__name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.menu-item__description {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Footer */
+.menu-item__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-1);
+}
+
+/* Price in monospace so columns align */
+.menu-item__price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Add button — primary forest fill */
+.menu-item__add-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--forest-dark);
+  color: #fff;
+  border-radius: var(--radius);
+  transition: background var(--transition-fast);
+}
+
+.menu-item__add-btn:hover {
+  background: var(--forest);
+}
+
+/* Quantity control */
+.menu-item__quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 2px;
+}
+
+.menu-item__qty-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--ink-soft);
+  border-radius: var(--radius);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.menu-item__qty-btn:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.menu-item__qty-btn--add {
+  background: var(--forest-dark);
+  color: #fff;
+}
+
+.menu-item__qty-btn--add:hover {
+  background: var(--forest);
+  color: #fff;
+}
+
+.menu-item__qty-value {
+  min-width: 22px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+}

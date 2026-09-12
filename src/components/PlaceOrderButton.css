@@ -1,0 +1,61 @@
+/* ==================== PLACE ORDER BUTTON ==================== */
+.place-order-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: var(--forest-dark);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: background var(--transition-base);
+}
+
+.place-order-btn:hover:not(:disabled) {
+  background: var(--forest);
+}
+
+.place-order-btn:active:not(:disabled) {
+  background: var(--forest-dark);
+}
+
+.place-order-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.place-order-btn__text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Total in monospace, pinned to the right */
+.place-order-btn__total {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+}
+
+/* Loading state */
+.place-order-btn--loading {
+  background: var(--ink-soft);
+  justify-content: center;
+}
+
+.place-order-btn__spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Success state */
+.place-order-btn--success {
+  background: var(--forest);
+  justify-content: center;
+}

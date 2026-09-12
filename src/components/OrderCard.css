@@ -1,0 +1,249 @@
+/* ==================== ORDER CARD ==================== */
+.order-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--transition-base);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: var(--space-4);
+}
+
+.order-card:hover {
+  border-color: var(--line-strong);
+}
+
+.order-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-4);
+  border-bottom: 1px dashed var(--line);
+  background: var(--paper);
+}
+
+.order-card__number-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card__customer-name {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.order-card__number {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.order-card__hash {
+  color: var(--muted);
+  margin-right: 1px;
+}
+
+.order-card__badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.order-card__type-badge {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge--dine-in {
+  background: var(--forest-tint);
+  color: var(--forest-dark);
+}
+
+.badge--takeaway {
+  background: #fff3cd; /* yellow tint */
+  color: #856404;
+}
+
+.badge--delivery {
+  background: #cce5ff; /* blue tint */
+  color: #004085;
+}
+
+/* Status pills — semantic colors only */
+.order-card__status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status--preparing {
+  background: var(--ochre-tint);
+  color: var(--ochre);
+  border: 1px solid rgba(168, 103, 42, 0.25);
+}
+
+.status--ready {
+  background: var(--forest-tint);
+  color: var(--forest-dark);
+  border: 1px solid rgba(47, 111, 78, 0.25);
+}
+
+.status--completed {
+  background: var(--paper);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+.status--cancelled {
+  background: var(--danger-tint);
+  color: var(--danger);
+  border: 1px solid rgba(178, 58, 52, 0.2);
+}
+
+/* Items — plain hairline chips, not pill-shaped */
+.order-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  flex: 1;
+  background: #fff;
+}
+
+.order-card__item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card__item {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+  background: var(--surface);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.order-card__item-notes {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--danger);
+  padding-left: var(--space-3);
+  margin-top: 2px;
+}
+
+/* Footer */
+.order-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--paper);
+  border-top: 1px dashed var(--line);
+}
+
+.order-card__time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.order-card__timer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: color var(--transition-base);
+}
+
+.timer--warning {
+  color: #856404; /* ochre */
+}
+
+.timer--danger {
+  color: var(--danger);
+}
+
+.order-card__total-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.order-card__payment-method {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--line);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.order-card__total {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Advance button — primary action, solid fill */
+.order-card__advance-btn {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  background: var(--forest-dark);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.order-card__advance-btn:hover {
+  background: var(--forest);
+}
+
+.order-card__advance-btn:active {
+  background: var(--forest-dark);
+}

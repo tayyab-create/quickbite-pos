@@ -1,0 +1,379 @@
+/* ==================== ADMIN PANEL ==================== */
+.admin {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--surface);
+  overflow-y: auto;
+}
+
+.admin__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--muted);
+}
+
+.admin__error-banner {
+  background: var(--danger-tint);
+  color: var(--danger);
+  padding: var(--space-3) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  border-bottom: 1px solid var(--danger);
+}
+
+/* Header */
+.admin__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background: #fff;
+  border-bottom: 2px solid var(--ink);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin__logo-icon {
+  color: var(--forest-dark);
+}
+
+.admin__header h1 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.admin__add-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--forest-dark);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.admin__add-btn:hover {
+  background: var(--forest);
+}
+
+/* Main Content */
+.admin__content {
+  padding: var(--space-6);
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.admin__table-container {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.admin__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin__table th,
+.admin__table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.admin__table th {
+  background: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.admin__table td {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.admin__table-actions-col {
+  width: 100px;
+  text-align: right;
+}
+
+.admin__row--unavailable {
+  background: var(--surface);
+  opacity: 0.7;
+}
+
+.admin__item-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.admin__item-emoji {
+  font-size: 1.25rem;
+}
+
+.admin__item-name {
+  font-weight: 500;
+}
+
+.admin__item-price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.admin__status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin__status-badge--active {
+  background: var(--forest-tint);
+  color: var(--forest-dark);
+}
+
+.admin__status-badge--inactive {
+  background: var(--line);
+  color: var(--muted);
+}
+
+.admin__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.admin__action-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.admin__action-btn--edit {
+  color: var(--ink-soft);
+}
+
+.admin__action-btn--edit:hover {
+  background: var(--paper);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.admin__action-btn--delete {
+  color: var(--danger);
+}
+
+.admin__action-btn--delete:hover {
+  background: var(--danger-tint);
+  border-color: var(--danger);
+}
+
+.admin__empty-row {
+  text-align: center;
+  color: var(--muted);
+  padding: var(--space-6) !important;
+}
+
+/* Modal Form */
+.admin__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.admin__modal {
+  background: #fff;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin__modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.admin__modal-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.admin__modal-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.admin__modal-close:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.admin__form {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.admin__form-row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.admin__form-row > * {
+  flex: 1;
+}
+
+.admin__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.admin__form-group--emoji {
+  flex: 0 0 80px;
+}
+
+.admin__form-group label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.admin__form-group input[type="text"],
+.admin__form-group input[type="number"],
+.admin__form-group select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  transition: border-color var(--transition-fast);
+}
+
+.admin__form-group input[type="text"]:focus,
+.admin__form-group input[type="number"]:focus,
+.admin__form-group select:focus {
+  outline: none;
+  border-color: var(--forest);
+  background: #fff;
+}
+
+.admin__form-group--checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.admin__form-group--checkbox label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.admin__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.admin__btn-cancel {
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.admin__btn-cancel:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.admin__btn-save {
+  padding: var(--space-2) var(--space-4);
+  background: var(--forest-dark);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.admin__btn-save:hover {
+  background: var(--forest);
+}

@@ -1,0 +1,189 @@
+/* ============================================
+   QUICKBITE POS — Institutional Ledger Design System
+   ============================================ */
+
+/* ==================== CSS RESET ==================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+ul, ol { list-style: none; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+input { outline: none; border: none; font-family: inherit; }
+
+/* ==================== CSS CUSTOM PROPERTIES ==================== */
+:root {
+  /* ── Palette ───────────────────────────────────────────── */
+  --ink:           #1C2B24; /* Primary text, header rule, emphasis fills   */
+  --ink-soft:      #4A5A52; /* Secondary text, labels                      */
+  --muted:         #7C8A82; /* Placeholder text, hints, table header labels */
+  --paper:         #F3F5F1; /* Page background (never pure white)           */
+  --surface:       #FFFFFF; /* Card/sheet bg, input fields                  */
+  --line:          #D8DED9; /* Hairline borders, section dividers           */
+  --line-strong:   #B9C3BC; /* Input borders                               */
+
+  /* Forest (the ONLY interactive accent) */
+  --forest:        #2F6F4E;
+  --forest-dark:   #20503A;
+  --forest-tint:   #E8F0EA;
+
+  /* Status accents — semantic use only, never decoration */
+  --ochre:         #A8672A;
+  --ochre-tint:    #F6ECDE;
+  --danger:        #B23A34;
+  --danger-tint:   #FBEAE9;
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-sans:  'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:  'IBM Plex Mono', 'Courier New', monospace;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+
+  /* ── Radius — minimal, not "app UI" ───────────────────── */
+  --radius:     3px;
+
+  /* ── Shadows — hairlines, not elevation ───────────────── */
+  --shadow-sm:  0 1px 4px rgba(28, 43, 36, 0.06);
+  --shadow-md:  0 2px 8px rgba(28, 43, 36, 0.08);
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --transition-fast: 0.12s ease;
+  --transition-base: 0.18s ease;
+
+  /* ── Z-index ────────────────────────────────────────────  */
+  --z-base:           1;
+  --z-dropdown:     100;
+  --z-sticky:       200;
+  --z-modal-backdrop: 500;
+  --z-modal:        600;
+  --z-toast:        700;
+
+  /* ── Layout ─────────────────────────────────────────────  */
+  --header-height: 64px;
+  --cart-width:    360px;
+
+  /* ── Spacing (unchanged scale) ──────────────────────────  */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10:40px;
+  --space-12:48px;
+  --space-16:64px;
+}
+
+/* ==================== BASE STYLES ==================== */
+#root {
+  height: 100vh;
+  width: 100vw;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-soft);
+}
+
+/* ==================== KEYFRAME ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Section eyebrow label — small caps with trailing hairline */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}

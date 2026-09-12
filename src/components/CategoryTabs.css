@@ -1,0 +1,73 @@
+/* ==================== CATEGORY TABS ==================== */
+.category-tabs {
+  padding: var(--space-4) var(--space-6) 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tabs__track {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.category-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: -1px; /* sit on top of container border-bottom */
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.category-tab:hover {
+  background: var(--forest-tint);
+  color: var(--forest-dark);
+}
+
+.category-tab--active {
+  background: var(--surface);
+  border-color: var(--line) var(--line) var(--surface);
+  border-bottom-color: var(--surface);
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
+.category-tab--active:hover {
+  background: var(--surface);
+  color: var(--forest-dark);
+}
+
+.category-tab__emoji {
+  font-size: 1rem;
+}
+
+.category-tab__label {
+  font-size: 13.5px;
+}
+
+/* Active indicator: forest underline on active tab */
+.category-tab__magic-indicator {
+  position: absolute;
+  bottom: -1px;
+  inset-inline: 0;
+  margin-inline: auto;
+  width: 20px;
+  height: 2px;
+  background: var(--forest);
+  border-radius: 1px;
+}

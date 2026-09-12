@@ -1,0 +1,189 @@
+/* ==================== ORDER CONFIRMATION MODAL ==================== */
+.order-confirmation-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 43, 36, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal-backdrop);
+}
+
+@keyframes confirmationIn {
+  0%   { opacity: 0; transform: translateY(28px) scale(0.93); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+@keyframes iconPopIn {
+  0%   { opacity: 0; transform: scale(0.4); }
+  65%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1);   }
+}
+
+.order-confirmation {
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.order-confirmation--animate {
+  animation: confirmationIn 0.35s cubic-bezier(0.34, 1.36, 0.64, 1) both;
+}
+
+.order-confirmation__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--space-5);
+  background: var(--forest-tint);
+  border: 1px solid var(--forest);
+  border-radius: 50%;
+  color: var(--forest-dark);
+  flex-shrink: 0;
+  /* Delayed pop so it appears after the modal settles */
+  animation: iconPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.order-confirmation__title {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-4);
+  flex-shrink: 0;
+}
+
+/* Order number — section-style with eyebrow label */
+.order-confirmation__number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  margin-bottom: var(--space-4);
+  flex-shrink: 0;
+}
+
+.order-confirmation__number-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.order-confirmation__number-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--forest-dark);
+  letter-spacing: 0.02em;
+}
+
+.order-confirmation__summary {
+  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.order-confirmation__items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--space-3);
+  overflow-y: auto;
+  padding-right: var(--space-1);
+}
+
+.order-confirmation__items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.order-confirmation__items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.order-confirmation__items::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 2px;
+}
+
+.order-confirmation__item {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 4px 0;
+}
+
+/* Total — inverted row: the one loud element */
+.order-confirmation__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.order-confirmation__total span:last-child {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.order-confirmation__status {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+  margin: var(--space-4) 0;
+  flex-shrink: 0;
+}
+
+/* Dismiss — ghost button */
+.order-confirmation__dismiss {
+  width: 100%;
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: background var(--transition-base), border-color var(--transition-base);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.order-confirmation__dismiss:hover {
+  background: var(--paper);
+  border-color: var(--forest);
+  color: var(--forest-dark);
+}
