@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ShoppingBag, Trash2, X, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
@@ -8,19 +8,24 @@ import './Cart.css';
 
 export default function Cart({ isOpen, onClose, onOpenPayment }) {
   const { cart, itemCount, clearCart, setOrderType, setCustomerName, setDiscount } = useCart();
+
+  // Local string for the discount input — committed only on blur / Enter.
+  // Sync back to '' when the cart's order discount is cleared externally (e.g. cart clear).
   const [discountInput, setDiscountInput] = useState('');
 
-  const handleDiscountBlur = () => {
+  useEffect(() => {
+    if (cart.discount === 0) setDiscountInput('');
+  }, [cart.discount]);
+
+  const commitOrderDiscount = useCallback(() => {
     const val = parseFloat(discountInput);
     setDiscount(isNaN(val) || val < 0 ? 0 : val);
-  };
+  }, [discountInput, setDiscount]);
 
-  const handleDiscountChange = (e) => {
-    setDiscountInput(e.target.value);
-    const val = parseFloat(e.target.value);
-    if (!isNaN(val) && val >= 0) setDiscount(val);
-    else if (e.target.value === '' || e.target.value === '-') setDiscount(0);
-  };
+  const clearOrderDiscount = useCallback(() => {
+    setDiscount(0);
+    setDiscountInput('');
+  }, [setDiscount]);
 
   return (
     <aside className={`cart ${isOpen ? 'cart--open' : ''}`} id="cart-panel">
@@ -118,32 +123,57 @@ export default function Cart({ isOpen, onClose, onOpenPayment }) {
               <span>Subtotal</span>
               <span>${cart.subtotal.toFixed(2)}</span>
             </div>
+
             {/* Order-level discount */}
             <div className="cart__total-row cart__total-row--discount">
-              <label className="cart__discount-label">
+              <label htmlFor="order-discount" className="cart__discount-label">
                 <Tag size={12} />
                 Order Discount
               </label>
               <div className="cart__discount-input-wrap">
                 <span className="cart__discount-prefix">$</span>
                 <input
+                  id="order-discount"
                   type="number"
                   min="0"
                   step="0.01"
                   className="cart__discount-input"
                   placeholder="0.00"
                   value={discountInput}
-                  onChange={handleDiscountChange}
-                  onBlur={handleDiscountBlur}
+                  onChange={(e) => setDiscountInput(e.target.value)}
+                  onBlur={commitOrderDiscount}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') commitOrderDiscount();
+                    if (e.key === 'Escape') clearOrderDiscount();
+                  }}
                 />
+                {cart.discount > 0 && (
+                  <button
+                    className="cart__discount-clear"
+                    onClick={clearOrderDiscount}
+                    aria-label="Remove order discount"
+                  >
+                    <X size={10} />
+                  </button>
+                )}
               </div>
             </div>
-            {cart.discount > 0 && (
-              <div className="cart__total-row cart__total-row--saving">
-                <span>You save</span>
-                <span>−${cart.discount.toFixed(2)}</span>
-              </div>
-            )}
+
+            {/* Savings highlight — only when discount is active */}
+            <AnimatePresence>
+              {cart.discount > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="cart__total-row cart__total-row--saving"
+                >
+                  <span>You save</span>
+                  <span>−${cart.discount.toFixed(2)}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             <div className="cart__total-row">
               <span>Tax (8%)</span>
               <span>${cart.tax.toFixed(2)}</span>

@@ -70,32 +70,83 @@
   text-decoration: underline;
 }
 
-/* Row holding note + discount buttons */
+/* Row holding note + discount quick-action links */
 .cart-item__meta-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-top: 2px;
+  gap: 4px;
+  margin-top: 3px;
+  flex-wrap: wrap;
 }
 
-/* Discount button */
-.cart-item__discount-btn {
-  display: flex;
+.cart-item__meta-sep {
+  color: var(--line-strong);
+  font-size: 10px;
+  user-select: none;
+}
+
+/* Shared ghost link style for note + discount triggers */
+.cart-item__action-link {
+  display: inline-flex;
   align-items: center;
   gap: 3px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--forest);
+  padding: 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.cart-item__action-link:hover {
+  color: var(--forest-dark);
+  text-decoration: underline;
+}
+
+/* Discount trigger — green when active */
+.cart-item__discount-trigger--active {
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
+/* Discount badge row — dedicated line below unit price */
+.cart-item__discount-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--forest-dark);
+  font-weight: 600;
+  margin-top: 1px;
+  overflow: hidden;
+}
+
+.cart-item__discount-clear {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
   color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+  line-height: 1;
 }
 
-.cart-item__discount-btn--active {
-  color: var(--forest-dark);
-  font-weight: 600;
+.cart-item__discount-clear:hover {
+  color: var(--danger);
 }
 
-/* Discount badge inline with unit price */
-.cart-item__discount-badge {
-  color: var(--forest-dark);
-  font-weight: 600;
-  margin-left: 2px;
+/* Inline discount editor */
+.cart-item__discount-edit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: 4px;
+  overflow: hidden;
 }
 
 /* Discount inline input on item */
@@ -103,20 +154,27 @@
   display: flex;
   align-items: center;
   gap: 2px;
-  border: 1px dashed var(--forest);
-  border-radius: 2px;
-  padding: 1px 4px;
+  border: 1px solid var(--forest);
+  border-radius: var(--radius);
+  padding: 2px 6px;
   background: var(--forest-tint);
+  transition: border-color var(--transition-fast);
+}
+
+.cart-item__discount-input-wrap:focus-within {
+  border-color: var(--forest-dark);
+  box-shadow: 0 0 0 2px rgba(34,134,83,0.15);
 }
 
 .cart-item__discount-prefix {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--forest-dark);
+  font-weight: 600;
 }
 
 .cart-item__discount-input {
-  width: 40px;
+  width: 48px;
   background: transparent;
   border: none;
   outline: none;
@@ -129,6 +187,13 @@
 .cart-item__discount-input::-webkit-inner-spin-button,
 .cart-item__discount-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+.cart-item__discount-hint {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .cart-item__notes-edit {
