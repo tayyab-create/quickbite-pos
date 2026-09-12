@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Settings, Plus, Edit2, Trash2, X, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { fetchAllMenuItems, createMenuItem, updateMenuItem, deleteMenuItem } from '../api/api';
+import Navigation from '../components/Navigation';
 import './Admin.css';
 
 export default function Admin() {
@@ -15,6 +16,7 @@ export default function Admin() {
   // Form State
   const [formData, setFormData] = useState({
     name: '',
+    description: '',
     price: '',
     category: 'Burgers',
     emoji: '🍔',
@@ -39,7 +41,7 @@ export default function Admin() {
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setFormData({ name: '', price: '', category: 'Burgers', emoji: '🍔', available: true });
+    setFormData({ name: '', description: '', price: '', category: 'Burgers', emoji: '🍔', available: true });
     setModalOpen(true);
   };
 
@@ -47,6 +49,7 @@ export default function Admin() {
     setEditingItem(item);
     setFormData({
       name: item.name,
+      description: item.description || '',
       price: item.price,
       category: item.category,
       emoji: item.emoji,
@@ -94,6 +97,7 @@ export default function Admin() {
       <header className="admin__header">
         <Settings size={28} className="admin__logo-icon" />
         <h1>Menu Administration</h1>
+        <Navigation />
         <button className="admin__add-btn" onClick={handleOpenAdd}>
           <Plus size={16} /> Add Item
         </button>
@@ -123,7 +127,12 @@ export default function Admin() {
                   <td>
                     <div className="admin__item-cell">
                       <span className="admin__item-emoji">{item.emoji}</span>
-                      <span className="admin__item-name">{item.name}</span>
+                      <div className="admin__item-details">
+                        <span className="admin__item-name">{item.name}</span>
+                        {item.description && (
+                          <span className="admin__item-desc">{item.description}</span>
+                        )}
+                      </div>
                     </div>
                   </td>
                   <td>{item.category}</td>
@@ -193,6 +202,16 @@ export default function Admin() {
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                     />
                   </div>
+                </div>
+
+                <div className="admin__form-group">
+                  <label>Description</label>
+                  <input 
+                    type="text" 
+                    value={formData.description}
+                    onChange={(e) => setFormData({...formData, description: e.target.value})}
+                    placeholder="Short description"
+                  />
                 </div>
 
                 <div className="admin__form-row">
