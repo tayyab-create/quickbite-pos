@@ -28,6 +28,10 @@ const orderItemSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  discount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const orderSchema = new mongoose.Schema({

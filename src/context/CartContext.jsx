@@ -14,11 +14,15 @@ const initialState = {
   discount: 0,
 };
 
-function calculateTotals(items, discount = 0) {
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const subtotalAfterDiscount = Math.max(0, subtotal - discount);
-  const tax = subtotalAfterDiscount * TAX_RATE;
-  const total = subtotalAfterDiscount + tax;
+function calculateTotals(items, orderDiscount = 0) {
+  // Each item line total = (price * qty) - itemDiscount
+  const subtotal = items.reduce((sum, item) => {
+    const lineTotal = item.price * item.quantity - (item.discount || 0);
+    return sum + Math.max(0, lineTotal);
+  }, 0);
+  const afterOrderDiscount = Math.max(0, subtotal - orderDiscount);
+  const tax = afterOrderDiscount * TAX_RATE;
+  const total = afterOrderDiscount + tax;
   return {
     subtotal: Math.round(subtotal * 100) / 100,
     tax: Math.round(tax * 100) / 100,
@@ -42,7 +46,7 @@ function cartReducer(state, action) {
             : item
         );
       } else {
-        newItems = [...state.items, { ...action.payload, quantity: 1, notes: '' }];
+        newItems = [...state.items, { ...action.payload, quantity: 1, notes: '', discount: 0 }];
       }
 
       return { ...state, items: newItems, ...calculateTotals(newItems, state.discount) };
@@ -75,6 +79,14 @@ function cartReducer(state, action) {
 
     case 'SET_DISCOUNT':
       return { ...state, discount: action.payload, ...calculateTotals(state.items, action.payload) };
+
+    case 'SET_ITEM_DISCOUNT': {
+      const { id, discount } = action.payload;
+      newItems = state.items.map((item) =>
+        item._id === id ? { ...item, discount: Math.max(0, discount) } : item
+      );
+      return { ...state, items: newItems, ...calculateTotals(newItems, state.discount) };
+    }
 
     case 'SET_ITEM_NOTES': {
       const { id, notes } = action.payload;
@@ -119,6 +131,10 @@ export function CartProvider({ children }) {
     dispatch({ type: 'SET_DISCOUNT', payload: amount });
   }, []);
 
+  const setItemDiscount = useCallback((id, amount) => {
+    dispatch({ type: 'SET_ITEM_DISCOUNT', payload: { id, discount: amount } });
+  }, []);
+
   const setItemNotes = useCallback((id, notes) => {
     dispatch({ type: 'SET_ITEM_NOTES', payload: { id, notes } });
   }, []);
@@ -140,6 +156,7 @@ export function CartProvider({ children }) {
         setOrderType,
         setCustomerName,
         setDiscount,
+        setItemDiscount,
         setItemNotes,
         clearCart,
       }}

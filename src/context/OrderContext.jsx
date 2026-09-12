@@ -68,6 +68,7 @@ export function OrderProvider({ children }) {
           quantity: item.quantity,
           emoji: item.emoji,
           notes: item.notes || '',
+          discount: item.discount || 0,
         })),
         subtotal: cartData.subtotal,
         tax: cartData.tax,

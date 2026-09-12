@@ -70,6 +70,67 @@
   text-decoration: underline;
 }
 
+/* Row holding note + discount buttons */
+.cart-item__meta-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: 2px;
+}
+
+/* Discount button */
+.cart-item__discount-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+}
+
+.cart-item__discount-btn--active {
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
+/* Discount badge inline with unit price */
+.cart-item__discount-badge {
+  color: var(--forest-dark);
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* Discount inline input on item */
+.cart-item__discount-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px dashed var(--forest);
+  border-radius: 2px;
+  padding: 1px 4px;
+  background: var(--forest-tint);
+}
+
+.cart-item__discount-prefix {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--forest-dark);
+}
+
+.cart-item__discount-input {
+  width: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--forest-dark);
+  font-weight: 600;
+}
+
+.cart-item__discount-input::-webkit-inner-spin-button,
+.cart-item__discount-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
 .cart-item__notes-edit {
   margin-top: 4px;
 }
@@ -146,6 +207,10 @@
   color: var(--ink);
   min-width: 48px;
   text-align: right;
+}
+
+.cart-item__total--discounted {
+  color: var(--forest-dark);
 }
 
 .cart-item__remove-btn {

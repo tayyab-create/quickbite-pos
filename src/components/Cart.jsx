@@ -1,4 +1,5 @@
-import { ShoppingBag, Trash2, X } from 'lucide-react';
+import { useState } from 'react';
+import { ShoppingBag, Trash2, X, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import CartItem from './CartItem';
@@ -6,7 +7,20 @@ import PlaceOrderButton from './PlaceOrderButton';
 import './Cart.css';
 
 export default function Cart({ isOpen, onClose, onOpenPayment }) {
-  const { cart, itemCount, clearCart, setOrderType, setCustomerName } = useCart();
+  const { cart, itemCount, clearCart, setOrderType, setCustomerName, setDiscount } = useCart();
+  const [discountInput, setDiscountInput] = useState('');
+
+  const handleDiscountBlur = () => {
+    const val = parseFloat(discountInput);
+    setDiscount(isNaN(val) || val < 0 ? 0 : val);
+  };
+
+  const handleDiscountChange = (e) => {
+    setDiscountInput(e.target.value);
+    const val = parseFloat(e.target.value);
+    if (!isNaN(val) && val >= 0) setDiscount(val);
+    else if (e.target.value === '' || e.target.value === '-') setDiscount(0);
+  };
 
   return (
     <aside className={`cart ${isOpen ? 'cart--open' : ''}`} id="cart-panel">
@@ -104,6 +118,32 @@ export default function Cart({ isOpen, onClose, onOpenPayment }) {
               <span>Subtotal</span>
               <span>${cart.subtotal.toFixed(2)}</span>
             </div>
+            {/* Order-level discount */}
+            <div className="cart__total-row cart__total-row--discount">
+              <label className="cart__discount-label">
+                <Tag size={12} />
+                Order Discount
+              </label>
+              <div className="cart__discount-input-wrap">
+                <span className="cart__discount-prefix">$</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  className="cart__discount-input"
+                  placeholder="0.00"
+                  value={discountInput}
+                  onChange={handleDiscountChange}
+                  onBlur={handleDiscountBlur}
+                />
+              </div>
+            </div>
+            {cart.discount > 0 && (
+              <div className="cart__total-row cart__total-row--saving">
+                <span>You save</span>
+                <span>−${cart.discount.toFixed(2)}</span>
+              </div>
+            )}
             <div className="cart__total-row">
               <span>Tax (8%)</span>
               <span>${cart.tax.toFixed(2)}</span>
